@@ -385,6 +385,17 @@
                             </ul>
                         </div>
                     )}
+                    <div role="tabpanel" className='section__panel' id={`panel_${activeTab}`} aria-labelledby={`tab_${activeTab}`}>
+                        <ul className="section__panel-list">
+                            {React.useMemo(() => TABS[activeTab].items.map((item, index) =>
+                                <Event
+                                    key={index}
+                                    {...item}
+                                    onSize={onSize}
+                                />, [activeTab]
+                            ))}
+                        </ul>
+                    </div>
                     {hasRightScroll &&
                         <div className="section__arrow" onClick={onArrowCLick}></div>
                     }
