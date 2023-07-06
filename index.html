@@ -70,7 +70,7 @@
         </header>;
     }
 
-    function Event(props) {
+    const Event = React.memo(function (props) {
         const ref = React.useRef();
 
         const { onSize } = props;
@@ -92,7 +92,7 @@
                 }
             </button>
         </li>;
-    }
+    })
 
     const TABS = {
         all: {
@@ -375,13 +375,13 @@
                     {TABS_KEYS.map(key =>
                         <div key={key} role="tabpanel" className={'section__panel' + (key === activeTab ? '' : ' section__panel_hidden')} aria-hidden={key === activeTab ? 'false' : 'true'} id={`panel_${key}`} aria-labelledby={`tab_${key}`}>
                             <ul className="section__panel-list">
-                                {TABS[key].items.map((item, index) =>
+                                {React.useMemo(TABS[key].items.map((item, index) =>
                                     <Event
                                         key={index}
                                         {...item}
                                         onSize={onSize}
                                     />
-                                )}
+                                ), [key])}
                             </ul>
                         </div>
                     )}
