@@ -70,7 +70,7 @@
         </header>;
     }
 
-    function Event(props) {
+    const Event = React.memo(function (props) {
         const ref = React.useRef();
 
         const { onSize } = props;
@@ -92,7 +92,7 @@
                 }
             </button>
         </li>;
-    }
+    })
 
     const TABS = {
         all: {
@@ -372,7 +372,6 @@
                 </div>
 
                 <div className="section__panel-wrapper" ref={ref}>
-                    
                     <div role="tabpanel" className='section__panel' id={`panel_${activeTab}`} aria-labelledby={`tab_${activeTab}`}>
                         <ul className="section__panel-list">
                             {React.useMemo(() => TABS[activeTab].items.map((item, index) =>
