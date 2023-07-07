@@ -169,7 +169,6 @@
         const initedRef = React.useRef(false);
         const [activeTab, setActiveTab] = React.useState('');
         const [hasRightScroll, setHasRightScroll] = React.useState(false);
-        const [activeItems, setActiveItems] = React.useState([]);
 
         React.useEffect(() => {
             if (!activeTab && !initedRef.current) {
@@ -177,19 +176,6 @@
                 setActiveTab(new URLSearchParams(location.search).get('tab') || 'all');
             }
         });
-
-        React.useEffect(() => {
-            if (!TABS[activeTab]) {
-                return;
-            }
-            setActiveItems(TABS[activeTab].items.map((id, index) =>
-                <Event
-                    key={index}
-                    item_id = {id}
-                    onSize={onSize}
-                />
-            ));
-        }, [activeTab])
 
         const onSelectInput = event => {
             setActiveTab(event.target.value);
@@ -346,7 +332,13 @@
                 <div className="section__panel-wrapper" ref={ref}>
                     <div key={activeTab} role="tabpanel" className={'section__panel'} aria-hidden={'false'} id={`panel_${activeTab}`} aria-labelledby={`tab_${activeTab}`}>
                         <ul className="section__panel-list">
-                            {activeItems}
+                            {activeTab ? TABS[activeTab].items.map((id, index) =>
+                                <Event
+                                    key={index}
+                                    item_id = {id}
+                                    onSize={onSize}
+                                />
+                            ) : null}
                         </ul>
                     </div>
                     {hasRightScroll &&
