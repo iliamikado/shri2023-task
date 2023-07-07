@@ -185,6 +185,9 @@
         })
 
         React.useEffect(() => {
+            if (!activeItems) {
+                return;
+            }
             setActiveItems(TABS[activeTab].items.map((id, index) =>
                 <Event
                     key={index}
