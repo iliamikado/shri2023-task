@@ -7,8 +7,6 @@
     <title>Яндекс.Дом</title>
     <link rel="preload" as="font" href="assets/lato.woff2" type="font/woff2" crossorigin="anonymous">
     <script defer src="vendors/react-with-dom.js"></script>
-    <link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
@@ -358,6 +356,16 @@
             </>
         );
     }, 100);
+</script>
+<script async>
+    function asyncCSS(href) {
+        var css = document.createElement('link');
+        css.rel = "stylesheet";
+        css.href = href;
+        document.head.appendChild(css);
+    }
+    asyncCSS('reset.css');
+    asyncCSS('styles.css');
 </script>
 
 </body>
