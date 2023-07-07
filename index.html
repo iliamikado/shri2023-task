@@ -70,7 +70,7 @@
         </header>;
     }
 
-    function Event(props) {
+    const Event = React.memo(function Event(props) {
         const ref = React.useRef();
 
         const { onSize } = props;
@@ -94,7 +94,7 @@
                 }
             </button>
         </li>;
-    }
+    });
 
     const ITEMS = [{
                 icon: 'light2',
