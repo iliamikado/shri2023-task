@@ -161,9 +161,7 @@
             items: [4]
         }
     };
-    for (let i = 0; i < 6; ++i) {
-        TABS.all.items = TABS.all.items.concat(TABS.all.items);
-    }
+
     const TABS_KEYS = Object.keys(TABS);
 
     function Main() {
@@ -181,7 +179,19 @@
         });
 
         React.useEffect(() => {
-            setActiveItems([]);
+            for (let i = 0; i < 6; ++i) {
+                TABS.all.items = TABS.all.items.concat(TABS.all.items);
+            }
+        })
+
+        React.useEffect(() => {
+            setActiveItems(TABS[activeTab].items.map((id, index) =>
+                <Event
+                    key={index}
+                    item_id = {id}
+                    onSize={onSize}
+                />
+            ));
         }, [activeTab])
 
         const onSelectInput = event => {
@@ -340,13 +350,7 @@
                     <div key={activeTab} role="tabpanel" className={'section__panel'} aria-hidden={'false'} id={`panel_${activeTab}`} aria-labelledby={`tab_${activeTab}`}>
                         <ul className="section__panel-list">
                             {activeTab ? 
-                                TABS[activeTab].items.map((id, index) =>
-                                    <Event
-                                        key={index}
-                                        item_id = {id}
-                                        onSize={onSize}
-                                    />
-                                )
+                                activeItems
                             : null}
                         </ul>
                     </div>
