@@ -185,7 +185,7 @@
         })
 
         React.useEffect(() => {
-            if (!activeItems) {
+            if (!TABS[activeItems]) {
                 return;
             }
             setActiveItems(TABS[activeTab].items.map((id, index) =>
@@ -352,9 +352,7 @@
                 <div className="section__panel-wrapper" ref={ref}>
                     <div key={activeTab} role="tabpanel" className={'section__panel'} aria-hidden={'false'} id={`panel_${activeTab}`} aria-labelledby={`tab_${activeTab}`}>
                         <ul className="section__panel-list">
-                            {activeTab ? 
-                                activeItems
-                            : null}
+                            {activeItems}
                         </ul>
                     </div>
                     {hasRightScroll &&
